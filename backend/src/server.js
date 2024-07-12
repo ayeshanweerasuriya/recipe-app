@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { connectDB } from "./connectDB.js";
+import { userRouter } from "../routes/users.js";
 
 connectDB();
 const app = express();
@@ -15,6 +16,8 @@ app.use("/", (req, res, next) => {
   console.log(req.method + " - " + req.url);
   next();
 });
+
+app.use("/auth", userRouter);
 
 app.get("/", (req, res) => {
   res.sendStatus(200);
